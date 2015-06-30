@@ -9,34 +9,58 @@
 import SpriteKit
 
 class GameScene: SKScene {
+
+    
+    
     override func didMoveToView(view: SKView) {
         /* Setup your scene here */
-        let myLabel = SKLabelNode(fontNamed:"Chalkduster")
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 65;
-        myLabel.position = CGPoint(x:CGRectGetMidX(self.frame), y:CGRectGetMidY(self.frame));
+        backgroundColor = SKColor.blueColor()
         
-        self.addChild(myLabel)
+        
+    }
+    
+    func creatPlayer()  {
+        
+        let player = SKSpriteNode(imageNamed: "Spaceship")
+        player.name = "blob"
+        /* Player spawning position */
+        player.position = CGPoint(x: size.width * 0.5, y: size.height * 0.5)
+        //spawn
+        addChild(player)
+        //variables for handling dashing
+        var firstTouch : CGPoint?
+        var touchRelease : CGPoint?
+        
     }
     
     override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
         /* Called when a touch begins */
         
         for touch: AnyObject in touches {
-            let location = touch.locationInNode(self)
+            let location = (touch as UITouch).locationInNode(self)
+            if let thename = self.nodeAtPoint(location).name {
+                if thename == "blob" {
+                    
+                }
+                else    {
+                //move all objects like jump
+                }
+            }
             
-            let sprite = SKSpriteNode(imageNamed:"Spaceship")
             
-            sprite.xScale = 0.5
-            sprite.yScale = 0.5
-            sprite.position = location
+            //sprite.position = location
             
-            let action = SKAction.rotateByAngle(CGFloat(M_PI), duration:1)
-            
-            sprite.runAction(SKAction.repeatActionForever(action))
-            
-            self.addChild(sprite)
+            //self.addChild(sprite)
         }
+    }
+    
+   override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+        //called when touch ends
+    
+    for touch: AnyObject in touches {
+            let location = (touch as UITouch).locationInNode(self)
+        
+    }
     }
    
     override func update(currentTime: CFTimeInterval) {
